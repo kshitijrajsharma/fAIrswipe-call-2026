@@ -402,34 +402,15 @@
 
   /* APPLY */
   .apply {
-    background: var(--red);
-    color: var(--paper);
+    background: var(--paper-deep);
+    color: var(--ink);
     padding: 44px 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: center;
     position: relative;
-    overflow: hidden;
-  }
-  .apply::before {
-    content: "";
-    position: absolute;
-    top: 0; right: 0;
-    width: 240px; height: 100%;
-    background-image: radial-gradient(circle, var(--paper) 1.5px, transparent 1.5px);
-    background-size: 14px 14px;
-    opacity: 0.18;
-    pointer-events: none;
-  }
-  .apply::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: var(--red-deep);
+    border-top: 4px solid var(--red);
   }
   .apply h2 {
     font-family: "Fraunces", serif;
@@ -438,16 +419,14 @@
     font-size: 42px;
     line-height: 1;
     letter-spacing: -0.01em;
-    position: relative;
-    z-index: 1;
   }
   .apply h2 em {
     font-style: italic;
-    color: var(--paper);
+    color: var(--red);
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
-    text-decoration-color: var(--paper);
+    text-decoration-color: var(--red);
   }
   .apply-info {
     display: flex;
@@ -456,23 +435,21 @@
     font-family: "IBM Plex Mono", monospace;
     font-size: 13px;
     line-height: 1.5;
-    position: relative;
-    z-index: 1;
   }
   .apply-info .row {
     display: grid;
     grid-template-columns: 110px 1fr;
     gap: 16px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(250, 246, 238, 0.25);
+    border-bottom: 1px solid rgba(26, 26, 26, 0.15);
   }
   .apply-info .row:last-child { border-bottom: none; }
   .apply-info .key {
-    color: var(--paper);
-    opacity: 0.7;
+    color: var(--red);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-size: 11px;
+    font-weight: 600;
   }
   .apply-info .val {
     font-size: 14px;
@@ -528,7 +505,7 @@
     </div>
     <aside class="hero-aside">
       <span class="pill"><span class="badge">$3K to $5K</span> per project</span>
-      <p>An open call for community mappers, urban researchers, and civic teams to detect anything visible from drone imagery and contribute it back to OpenStreetMap.</p>
+      <p>An open call for community mappers, urban researchers, and civic teams to detect anything visible from drone imagery and publish the results as open mapping data.</p>
     </aside>
   </section>
 
@@ -590,9 +567,9 @@
       </div>
       <div class="step">
         <div class="stepnum">Step 05</div>
-        <h3>Publish to OSM</h3>
-        <p>Validate the model outputs, edit where needed, and submit the final mapped features to OpenStreetMap. Free, open, reusable.</p>
-        <span class="tool">OpenStreetMap</span>
+        <h3>Publish openly</h3>
+        <p>Validate the model outputs and publish them as open mapping data. OpenStreetMap is the preferred destination. Where features need conflation (rooftops, for example), HDX or another public platform is accepted.</p>
+        <span class="tool">OSM preferred</span>
       </div>
     </div>
   </section>
@@ -620,7 +597,7 @@
           <li><strong>Imagery access.</strong> Either fly your own drone or use existing drone imagery covering the project area.</li>
           <li><strong>A local team or community</strong> able to run a Locate mapathon and validate the results.</li>
           <li><strong>Willingness to iterate</strong> with the HOT team if the model needs more data to perform well.</li>
-          <li><strong>Open data commitment.</strong> All outputs published openly through MapSwipe and OpenStreetMap.</li>
+          <li><strong>Open data commitment.</strong> All outputs published openly. Mapping features go to OpenStreetMap where feasible, or to HDX or another public platform when conflation or other constraints apply.</li>
         </ul>
       </div>
     </div>
@@ -640,8 +617,8 @@
       </div>
       <div class="deliv">
         <div class="tag">Deliverable 02</div>
-        <h4>OpenStreetMap features</h4>
-        <p>Validated mapped features submitted to OpenStreetMap as the final, reusable public output.</p>
+        <h4>Open mapping data</h4>
+        <p>Validated features published as open data. OpenStreetMap is the preferred destination. Where conflation or other constraints make OSM contribution unfeasible (rooftops, for example), HDX or another open public platform is accepted.</p>
       </div>
     </div>
   </section>
@@ -670,7 +647,7 @@
 
   <footer>
     <span>Humanitarian OpenStreetMap Team / Open Call 2026</span>
-    <span>MapSwipe . fAIr . OpenStreetMap</span>
+    <span>MapSwipe . fAIr . OpenStreetMap . HDX</span>
   </footer>
 
 </div>
