@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Call: Map Your City with fAIr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf6ee;
+    --paper-deep: #ece3d0;
+    --red: #c8322a;
+    --red-deep: #8a201a;
+    --red-soft: #e85a4f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-image:
+      linear-gradient(var(--paper-deep) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-deep) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 56px 64px;
+    position: relative;
+  }
+
+  /* HEADER */
+  .marker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .marker .dot {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .marker .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+    opacity: 0.4;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: end;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 6px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--red);
+  }
+
+  .hero-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+  .hero-aside p {
+    font-size: 17px;
+    line-height: 1.5;
+    max-width: 360px;
+  }
+  .hero-aside .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--red);
+    border-radius: 100px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--paper);
+    width: fit-content;
+    color: var(--red-deep);
+  }
+  .pill .badge {
+    background: var(--red);
+    color: var(--paper);
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 2px solid var(--ink);
+    margin-bottom: 56px;
+    background: var(--paper);
+  }
+  .stat {
+    padding: 22px 24px;
+    border-right: 1px solid var(--ink);
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .stat .num .small {
+    font-size: 22px;
+    color: var(--red);
+  }
+  .stat.highlight {
+    background: var(--red);
+    color: var(--paper);
+  }
+  .stat.highlight .num { color: var(--paper); }
+  .stat.highlight .num .small { color: var(--paper); opacity: 0.7; }
+  .stat .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+  .stat.highlight .label { opacity: 0.85; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 56px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-head .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--red);
+    font-weight: 600;
+  }
+  .section-head h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+  }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.4;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .about-grid p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .about-grid p .accent {
+    background: var(--red);
+    color: var(--paper);
+    padding: 1px 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+
+  /* WORKFLOW */
+  .workflow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .step {
+    padding: 24px 20px 28px;
+    border-right: 1px solid var(--ink);
+    background: var(--paper);
+    transition: background 0.3s ease;
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+  .step:hover { background: var(--paper-deep); }
+  .step .stepnum {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--red);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .step .stepnum::before {
+    content: "";
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--red);
+  }
+  .step h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+  .step .tool {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    padding: 3px 8px;
+    border: 1px solid var(--red);
+    color: var(--red);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .step .tool.hot {
+    background: var(--red);
+    color: var(--paper);
+    border-color: var(--red);
+  }
+
+  /* OFFER + ELIGIBILITY */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 2px solid var(--ink);
+  }
+  .col {
+    padding: 28px 28px 32px;
+  }
+  .col + .col { border-left: 1px solid var(--ink); }
+  .col h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .col h3 .marker-bar {
+    display: inline-block;
+    width: 24px;
+    height: 4px;
+    background: var(--red);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .checklist li::before {
+    content: "›";
+    color: var(--red);
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.1;
+    flex-shrink: 0;
+  }
+  .checklist li strong {
+    font-weight: 600;
+  }
+  .checklist li .note {
+    display: block;
+    font-size: 12.5px;
+    opacity: 0.65;
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  /* DELIVERABLES */
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .deliv {
+    border: 2px solid var(--ink);
+    padding: 24px 24px 26px;
+    background: var(--paper);
+    position: relative;
+  }
+  .deliv::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--red);
+  }
+  .deliv .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .deliv h4 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .deliv p {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+
+  /* APPLY */
+  .apply {
+    background: var(--red);
+    color: var(--paper);
+    padding: 44px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .apply::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 240px; height: 100%;
+    background-image: radial-gradient(circle, var(--paper) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .apply::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--red-deep);
+  }
+  .apply h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
+  }
+  .apply h2 em {
+    font-style: italic;
+    color: var(--paper);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    text-decoration-color: var(--paper);
+  }
+  .apply-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .apply-info .row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(250, 246, 238, 0.25);
+  }
+  .apply-info .row:last-child { border-bottom: none; }
+  .apply-info .key {
+    color: var(--paper);
+    opacity: 0.7;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .apply-info .val {
+    font-size: 14px;
+  }
+  .apply-info .val strong {
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .page { padding: 32px 24px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: none; border-bottom: 1px solid var(--ink); }
+    .stat:nth-child(odd) { border-right: 1px solid var(--ink); }
+    .stat:nth-child(n+3) { border-bottom: none; }
+    .workflow { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--ink); }
+    .step:last-child { border-bottom: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 20px; }
+    .two-col { grid-template-columns: 1fr; }
+    .col + .col { border-left: none; border-top: 1px solid var(--ink); }
+    .apply { grid-template-columns: 1fr; padding: 28px; }
+    .deliverables { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="marker">
+    <span class="dot"></span>
+    <span>Open Call / 2026</span>
+    <span class="line"></span>
+    <span>Humanitarian OpenStreetMap Team</span>
+  </div>
+
+  <section class="hero">
+    <div>
+      <h1>Map your city <em>with fAIr.</em></h1>
+    </div>
+    <aside class="hero-aside">
+      <span class="pill"><span class="badge">$3K to $5K</span> per project</span>
+      <p>An open call for community mappers, urban researchers, and civic teams to detect anything visible from drone imagery and contribute it back to OpenStreetMap.</p>
+    </aside>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="num">1000<span class="small">+</span></div>
+      <div class="label">Training samples (target)</div>
+    </div>
+    <div class="stat">
+      <div class="num">2</div>
+      <div class="label">Open public outputs</div>
+    </div>
+    <div class="stat">
+      <div class="num">1</div>
+      <div class="label">City, mapped openly</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>The idea</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="about-grid">
+      <p>You know your city. You know what is missing on its map. We support you to fill the gaps using AI assisted mapping on drone imagery, with all results published as open data.</p>
+      <p>Selected projects receive between <span class="accent">$3,000 and $5,000</span> in funding, scaled to proposal scope, plus full technical support from HOT. The AI side is on us. You define the feature, run the mapathon, and validate the output.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>The pipeline</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="workflow">
+      <div class="step">
+        <div class="stepnum">Step 01</div>
+        <h3>Define the feature</h3>
+        <p>Pick anything visible from drone imagery. Open spaces, rooftops, solar panels, informal structures, street furniture, anything you can see and want mapped.</p>
+      </div>
+      <div class="step">
+        <div class="stepnum">Step 02</div>
+        <h3>Feasibility study</h3>
+        <p>Confirm enough samples exist (around 1000+ is a good target) and decide on imagery: fly your own drone or use existing drone imagery for the area.</p>
+      </div>
+      <div class="step">
+        <div class="stepnum">Step 03</div>
+        <h3>Run a Locate mapathon</h3>
+        <p>Set up a Locate project on MapSwipe and mobilise volunteers to label your feature. We help you scope and run the session.</p>
+        <span class="tool">MapSwipe / Locate</span>
+      </div>
+      <div class="step">
+        <div class="stepnum">Step 04</div>
+        <h3>Use the model output</h3>
+        <p>HOT supports yout to train a fAIr model on your samples and shares the inference output. If results are weak, you can iterate with the team and collect more data.</p>
+        <span class="tool hot">Model training runs on HOT infrastructure</span>
+      </div>
+      <div class="step">
+        <div class="stepnum">Step 05</div>
+        <h3>Publish to OSM</h3>
+        <p>Validate the model outputs, edit where needed, and submit the final mapped features to OpenStreetMap. Free, open, reusable.</p>
+        <span class="tool">OpenStreetMap</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>What you get, what we expect</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="two-col">
+      <div class="col">
+        <h3><span class="marker-bar"></span>What HOT offers</h3>
+        <ul class="checklist">
+          <li><strong>$3,000 to $5,000 in project funding,</strong> scaled to proposal scope. Covers mapathon costs, validation effort, and team time.</li>
+          <li><strong>AI support.</strong> We train the fAIr model on your data and share the inference outputs.</li>
+          <li><strong>Technical guidance</strong> on MapSwipe Locate setup, sample sizing, validation, and OSM contribution.</li>
+          <li><strong>Possible drone or expert support.</strong> <span class="note">Subject to availability. We may be able to send a team member or connect you with mentors.</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3><span class="marker-bar"></span>What we expect</h3>
+        <ul class="checklist">
+          <li><strong>A clear feature target</strong> visible in drone imagery, with around 1000+ expected samples (smaller cases considered).</li>
+          <li><strong>Imagery access.</strong> Either fly your own drone or use existing drone imagery covering the project area.</li>
+          <li><strong>A local team or community</strong> able to run a Locate mapathon and validate the results.</li>
+          <li><strong>Willingness to iterate</strong> with the HOT team if the model needs more data to perform well.</li>
+          <li><strong>Open data commitment.</strong> All outputs published openly through MapSwipe and OpenStreetMap.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Final deliverables</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="deliverables">
+      <div class="deliv">
+        <div class="tag">Deliverable 01</div>
+        <h4>Completed MapSwipe project</h4>
+        <p>The Locate project results from your mapathon, finalised and contributed publicly through MapSwipe.</p>
+      </div>
+      <div class="deliv">
+        <div class="tag">Deliverable 02</div>
+        <h4>OpenStreetMap features</h4>
+        <p>Validated mapped features submitted to OpenStreetMap as the final, reusable public output.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="apply">
+    <h2>Send us your <em>proposal.</em></h2>
+    <div class="apply-info">
+      <div class="row">
+        <span class="key">Who</span>
+        <span class="val">Community mappers, urban researchers, civic tech teams, NGOs.</span>
+      </div>
+      <div class="row">
+        <span class="key">Budget</span>
+        <span class="val"><strong>USD 3,000 to 5,000</strong> per selected project, based on proposal.</span>
+      </div>
+      <div class="row">
+        <span class="key">Deadline</span>
+        <span class="val">[ Coming Soon]</span>
+      </div>
+      <div class="row">
+        <span class="key">Apply</span>
+        <span class="val">[ Coming Soon]</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Humanitarian OpenStreetMap Team / Open Call 2026</span>
+    <span>MapSwipe . fAIr . OpenStreetMap</span>
+  </footer>
+
+</div>
+</body>
+</html>
