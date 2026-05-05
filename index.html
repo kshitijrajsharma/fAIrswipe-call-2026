@@ -54,6 +54,11 @@
     border-radius: 50%;
     animation: pulse 2.4s ease-in-out infinite;
   }
+  .marker .hot-logo {
+    height: 64px;
+    width: auto;
+    display: block;
+  }
   .marker .line {
     flex: 1;
     height: 1px;
@@ -441,10 +446,28 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
     font-family: "IBM Plex Mono", monospace;
     font-size: 10.5px;
     letter-spacing: 0.12em;
-    opacity: 0.55;
+    opacity: 0.7;
+  }
+  footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  footer a:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+  footer .links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
   }
 
   /* RESPONSIVE */
@@ -469,6 +492,9 @@
 <div class="page">
 
   <div class="marker">
+    <a href="https://www.hotosm.org/en/" target="_blank" rel="noopener">
+      <img class="hot-logo" src="https://docs.hotosm.org/assets/images/hot_logo.png" alt="Humanitarian OpenStreetMap Team">
+    </a>
     <span class="dot"></span>
     <span>Open Call / 2026</span>
     <span class="line"></span>
@@ -627,7 +653,11 @@
 
   <footer>
     <span>Humanitarian OpenStreetMap Team / Open Call 2026</span>
-    <span>MapSwipe . fAIr . OpenStreetMap</span>
+    <div class="links">
+      <a href="https://www.hotosm.org/en/" target="_blank" rel="noopener">HOT</a>
+      <a href="https://fair.hotosm.org/" target="_blank" rel="noopener">fAIr</a>
+      <a href="https://mapswipe.org/en/" target="_blank" rel="noopener">MapSwipe</a>
+    </div>
   </footer>
 
 </div>
