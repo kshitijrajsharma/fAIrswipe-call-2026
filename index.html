@@ -6,16 +6,16 @@
 <title>Open Call: Map Your City with fAIr</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a1a;
+    --ink: #111c31;
     --paper: #ffffff;
-    --paper-deep: #fafafa;
-    --line: #1a1a1a;
-    --line-soft: rgba(26, 26, 26, 0.15);
+    --paper-deep: #f3f3f3;
+    --line: #111c31;
+    --line-soft: rgba(17, 28, 49, 0.15);
     --red: #d73f3f;
-    --red-deep: #a82929;
+    --red-deep: #a52a28;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,7 +23,7 @@
   html, body {
     background: var(--paper);
     color: var(--ink);
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-family: "Archivo", -apple-system, Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -36,12 +36,11 @@
     position: relative;
   }
 
-  /* HEADER */
   .marker {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -91,9 +90,8 @@
   }
 
   h1 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 300;
-    font-variation-settings: "opsz" 144;
     font-size: clamp(48px, 7vw, 96px);
     line-height: 0.92;
     letter-spacing: -0.02em;
@@ -123,7 +121,7 @@
     padding: 8px 14px;
     border: 1px solid var(--red);
     border-radius: 100px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -139,7 +137,6 @@
     font-weight: 600;
   }
 
-  /* STATS */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -153,7 +150,7 @@
   }
   .stat:last-child { border-right: none; }
   .stat .num {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 400;
     font-size: 44px;
     line-height: 1;
@@ -165,7 +162,7 @@
     color: var(--red);
   }
   .stat .label {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -173,7 +170,6 @@
     opacity: 0.65;
   }
 
-  /* SECTIONS */
   .section { margin-bottom: 56px; }
   .section-head {
     display: flex;
@@ -182,16 +178,15 @@
     margin-bottom: 28px;
   }
   .section-head .num {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 12px;
     letter-spacing: 0.16em;
     color: var(--red);
     font-weight: 600;
   }
   .section-head h2 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 300;
-    font-variation-settings: "opsz" 144;
     font-size: 36px;
     letter-spacing: -0.01em;
   }
@@ -202,7 +197,6 @@
     opacity: 0.2;
   }
 
-  /* ABOUT */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -216,12 +210,11 @@
     background: var(--red);
     color: var(--paper);
     padding: 1px 8px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 14px;
     font-weight: 500;
   }
 
-  /* WORKFLOW */
   .workflow {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -237,7 +230,7 @@
   .step:last-child { border-right: none; }
   .step:hover { background: var(--paper-deep); }
   .step .stepnum {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 11px;
     letter-spacing: 0.14em;
     color: var(--red);
@@ -254,7 +247,7 @@
     background: var(--red);
   }
   .step h3 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 500;
     font-size: 20px;
     line-height: 1.15;
@@ -269,7 +262,7 @@
   .step .tool {
     display: inline-block;
     margin-top: 12px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 10.5px;
     padding: 4px 8px;
     border: 1px solid var(--red);
@@ -282,7 +275,6 @@
     word-break: break-word;
   }
 
-  /* OFFER + EXPECT — banner stacked */
   .oe-block { margin-bottom: 36px; }
   .oe-block:last-child { margin-bottom: 0; }
   .oe-banner {
@@ -295,7 +287,7 @@
     margin-bottom: 24px;
   }
   .oe-banner .badge {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -305,7 +297,7 @@
     font-weight: 600;
   }
   .oe-banner h3 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 500;
     font-style: italic;
     font-size: 28px;
@@ -329,7 +321,7 @@
   .oe-item::before {
     content: "›";
     color: var(--red);
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-weight: 700;
     font-size: 18px;
     line-height: 1.1;
@@ -343,7 +335,6 @@
     font-style: italic;
   }
 
-  /* DELIVERABLES */
   .deliverables {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -366,7 +357,7 @@
     background: var(--red);
   }
   .deliv .tag {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -375,7 +366,7 @@
     font-weight: 600;
   }
   .deliv h4 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 500;
     font-size: 22px;
     margin-bottom: 8px;
@@ -387,7 +378,6 @@
     opacity: 0.8;
   }
 
-  /* APPLY */
   .apply {
     background: var(--paper-deep);
     color: var(--ink);
@@ -399,9 +389,8 @@
     border-top: 4px solid var(--red);
   }
   .apply h2 {
-    font-family: "Fraunces", serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-weight: 300;
-    font-variation-settings: "opsz" 144;
     font-size: 44px;
     line-height: 1;
     letter-spacing: -0.01em;
@@ -418,7 +407,7 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 13px;
     line-height: 1.5;
   }
@@ -440,7 +429,6 @@
   .apply-info .val { font-size: 14px; }
   .apply-info .val strong { font-weight: 600; }
 
-  /* FOOTER */
   footer {
     margin-top: 40px;
     display: flex;
@@ -448,7 +436,7 @@
     align-items: flex-end;
     gap: 24px;
     flex-wrap: wrap;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Archivo", sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.12em;
     opacity: 0.7;
@@ -470,7 +458,6 @@
     flex-wrap: wrap;
   }
 
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     .page { padding: 32px 24px; }
     .hero { grid-template-columns: 1fr; gap: 24px; }
