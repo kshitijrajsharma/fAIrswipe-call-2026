@@ -53,10 +53,17 @@
     border-radius: 50%;
     animation: pulse 2.4s ease-in-out infinite;
   }
-  .marker .hot-logo {
-    height: 64px;
-    width: auto;
+  .hot-logo {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    line-height: 0;
+    text-decoration: none;
+  }
+  .hot-logo img {
     display: block;
+    height: 100%;
+    width: auto;
   }
   .marker .line {
     flex: 1;
@@ -479,8 +486,9 @@
 <div class="page">
 
   <div class="marker">
-    <a href="https://www.hotosm.org/en/" target="_blank" rel="noopener">
-      <img class="hot-logo" src="https://docs.hotosm.org/assets/images/hot_logo.png" alt="Humanitarian OpenStreetMap Team">
+    <a href="https://www.hotosm.org/en/" target="_blank" rel="noopener" class="hot-logo">
+      <img src="https://raw.githubusercontent.com/hotosm/ui/main/src/assets/logo/hot-logo-icon.svg" alt="HOT">
+      <img src="https://raw.githubusercontent.com/hotosm/ui/main/src/assets/logo/hot-logo-text.svg" alt="Humanitarian OpenStreetMap Team">
     </a>
     <span class="dot"></span>
     <span>Open Call / 2026</span>
